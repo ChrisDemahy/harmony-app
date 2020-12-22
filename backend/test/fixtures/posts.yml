@@ -2,6 +2,10 @@
 
 one:
   content: MyText
+  user: userOne
+  chatroom: chatroomOne
 
 two:
   content: MyText
+  user: userTwo
+  chatroom: chatroomTwo
