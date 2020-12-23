@@ -5,21 +5,28 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
 User.destroy_all
 Post.destroy_all
+UserChatroom.destroy_all
 Chatroom.destroy_all
 
 u1 = User.create(username: 'Michael')
 u2 = User.create(username: 'Johnny')
 u3 = User.create(username: 'Tania')
 
-c1 = Chatroom.create(name: 'M & J', members: [u1, u2])
-c2 = Chatroom.create(name: 'M & T')
+c1 = Chatroom.create(name: 'Golf')
+c2 = Chatroom.create(name: 'Golf')
 
-u1.memberships << c2
-c2.members << u3
+uc1 = UserChatroom.create(user_id: u1.id, chatroom_id: c1.id)
+uc2 = UserChatroom.create(user_id: u2.id, chatroom_id: c1.id)
 
-p1 = Post.create(content: 'Hello Johnny', user: u1, chatroom: c1)
-p2 = Post.create(content: 'Hello Michael!', user: u2, chatroom: c1)
-p3 = Post.create(content: 'Hello Tania!', user: u1, chatroom: c2)
+uc3 = UserChatroom.create(user_id: u2.id, chatroom_id: c2.id)
+uc4 = UserChatroom.create(user_id: u3.id, chatroom_id: c2.id)
+
+p1 = Post.create(content: 'Hello Johnny from Exercise', user_id: u1.id, chatroom_id: c1.id)
+p2 = Post.create(content: 'Hello Michael from Exercise!', user_id: u2.id, chatroom_id: c1.id)
+
+p3 = Post.create(content: 'Hello Tania from Golf!', user_id: u2.id, chatroom_id: c2.id)
+p4 = Post.create(content: 'Hello Johny from Golf!', user_id: u3.id, chatroom_id: c2.id)

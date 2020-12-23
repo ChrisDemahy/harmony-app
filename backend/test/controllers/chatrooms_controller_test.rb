@@ -1,22 +1,38 @@
 require 'test_helper'
 
 class ChatroomsControllerTest < ActionDispatch::IntegrationTest
-  test 'should get index of all chatrooms' do
-    get chatrooms_url
-    assert_response :success
-    assert_equal 'index', @controller.action_name
-
-    assert_match 'chatrooms', @response.body
-    assert_match Chatroom.all.to_json, @response.body
+  setup do
+    @chatroom = chatrooms(:one)
   end
 
-  test 'should get attributes of a single chatroom' do
-    @chatroom = Chatroom.all.sample
-    get chatrooms_url
+  test "should get index" do
+    get chatrooms_url, as: :json
     assert_response :success
-    assert_equal 'index', @controller.action_name
+  end
 
-    assert_match 'chatrooms', @response.body
-    assert_match Chatroom.all.to_json, @response.body
+  test "should create chatroom" do
+    assert_difference('Chatroom.count') do
+      post chatrooms_url, params: { chatroom: { name: @chatroom.name } }, as: :json
+    end
+
+    assert_response 201
+  end
+
+  test "should show chatroom" do
+    get chatroom_url(@chatroom), as: :json
+    assert_response :success
+  end
+
+  test "should update chatroom" do
+    patch chatroom_url(@chatroom), params: { chatroom: { name: @chatroom.name } }, as: :json
+    assert_response 200
+  end
+
+  test "should destroy chatroom" do
+    assert_difference('Chatroom.count', -1) do
+      delete chatroom_url(@chatroom), as: :json
+    end
+
+    assert_response 204
   end
 end
