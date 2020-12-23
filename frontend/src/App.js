@@ -1,24 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
+import PostChannel from './components/post_channel'
 import './App.css';
 
 function App() {
+  // const [posts, setPosts] = useState([]);
+  // const [newPost, setNewPost] = useState('');
+
+  // useEffect(() => {
+  //   socketClient.onopen = (event) => {
+  //     const message = {
+  //       command: "subscribe",
+  //       identifier: JSON.stringify({ channel: "PostChannel" }),
+  //     }
+  //     socketClient.send(JSON.stringify(message))
+  //   };
+
+  //   socketClient.onmessage = (event) => {
+  //     let serverResponse = JSON.parse(event.data);
+
+  //     if (serverResponse.type === 'ping') return;
+
+  //     const data  = serverResponse.message;
+
+  //     if(data && data.type === 'all_posts') {
+  //       setPosts(data.post_history);
+  //       // console.log(data)
+  //     }
+  //     if(data && data.type === 'new_post') {
+  //       const incomingPost = data.post
+  //       setPosts((prevPosts) => [...prevPosts, incomingPost]);
+  //       // console.log(data)
+  //     }
+  //   };
+  // }, []);
+
+  // const sendPost = (e) => {
+  //   e.preventDefault();
+  //   const message = {
+  //     command: "message",
+  //     identifier: JSON.stringify({ channel: "PostChannel" }),
+  //     data: JSON.stringify({
+  //       action: 'send_post',
+  //       content: newPost,
+  //       user_id: 1,
+  //       chatroom_id: 1,
+  //     })
+  //   }
+  //   socketClient.send(JSON.stringify(message))
+  //   // console.log('activity sent', newPost)
+  // }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PostChannel />
+      
     </div>
   );
 }
