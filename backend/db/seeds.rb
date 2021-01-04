@@ -12,9 +12,9 @@ Post.destroy_all
 UserChatroom.destroy_all
 Chatroom.destroy_all
 
-u1 = User.create(username: 'Michael')
-u2 = User.create(username: 'Johnny')
-u3 = User.create(username: 'Tania')
+u1 = User.create(username: 'Michael', password: 'hunter2')
+u2 = User.create(username: 'Johnny', password: 'hunter2')
+u3 = User.create(username: 'Tania', password: 'hunter2')
 
 c1 = Chatroom.create(name: 'Golf')
 c2 = Chatroom.create(name: 'Golf')

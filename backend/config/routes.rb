@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
+  post '/login', to: 'auth#login' 
+  
   resources :posts
   resources :user_chatrooms
   resources :chatrooms

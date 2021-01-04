@@ -10,7 +10,16 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    #BEFORE
+    # render json: @user
+
+    # # Get the relationships related to the user
+    # user_chatrooms = UserChatroom.where(user_id: @user.id)
+    # # Use that relationship to find chatrooms
+    # ids = user_chatrooms.map{|object| object.chatroom_id}
+    # render json: us
+    render json: @user, include: [:chatrooms, :user_chatrooms]
+
   end
 
   # POST /users

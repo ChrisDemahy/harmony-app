@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 
 const Chatroom = ({ posts }) => {
+  console.log(posts);
   // Container to show all the posts
   // Takes an array of post objects as props
   // Declare a new state variable, which we'll call "count"
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Similar to componentDidMount and componentDidUpdate:

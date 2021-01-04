@@ -2,44 +2,46 @@ import React from "react";
 
 const ChatHeader = () => {
   return (
-    <nav class="level">
+    <nav className="level">
       {/* Left Side */}
-      <div class="level-left">
-        <div class="level-item">
-          <p class="subtitle is-5">
+      <div className="level-left">
+        <div className="level-item">
+          <p className="subtitle is-5">
             <strong>123</strong> posts
           </p>
         </div>
-        <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
-              <input class="input" type="text" placeholder="Find a post" />
+        <div className="level-item">
+          <div className="field has-addons">
+            <p className="control">
+              <input className="input" type="text" placeholder="Find a post" />
             </p>
-            <p class="control">
-              <button class="button">Search</button>
+            <p className="control">
+              <button className="button">Search</button>
             </p>
           </div>
         </div>
       </div>
 
       {/* Right Side */}
-      <div class="level-right">
-        <p class="level-item">
+      <div className="level-right">
+        <p className="level-item">
           <strong>All</strong>
         </p>
-        <p class="level-item">
+        <p className="level-item">
           <a>Published</a>
         </p>
-        <p class="level-item">
+        <p className="level-item">
           <a>Drafts</a>
         </p>
-        <p class="level-item">
+        <p className="level-item">
           <a>Deleted</a>
         </p>
-        <p class="level-item">
-          <a class="button is-success">New</a>
+        <p className="level-item">
+          <a className="button is-success">New</a>
         </p>
       </div>
     </nav>
   );
 };
+
+export default ChatHeader;

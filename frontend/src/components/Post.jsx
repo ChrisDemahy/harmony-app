@@ -1,14 +1,14 @@
 const Post = ({ post }) => {
   // Responsible for dipslaying an individual post
   return (
-    <article class="media">
-      <figure class="media-left">
-        <p class="image is-64x64">
+    <article className="media">
+      <figure className="media-left">
+        <p className="image is-64x64">
           <img alt="" src="https://bulma.io/images/placeholders/128x128.png" />
         </p>
       </figure>
-      <div class="media-content">
-        <div class="content">
+      <div className="media-content">
+        <div className="content">
           <p>
             <strong>John Smith</strong> <small>@johnsmith</small>{" "}
             <small>31m</small>
@@ -18,30 +18,31 @@ const Post = ({ post }) => {
             non massa sem. Etiam finibus odio quis feugiat facilisis.
           </p>
         </div>
-        <nav class="level is-mobile">
-          <div class="level-left">
-            <button class="level-item">
-              <span class="icon is-small">
-                <i class="fas fa-reply"></i>
+        <nav className="level is-mobile">
+          <div className="level-left">
+            <button className="level-item">
+              <span className="icon is-small">
+                <i className="fas fa-reply"></i>
               </span>
             </button>
-            <button class="level-item">
-              <span class="icon is-small">
-                <i class="fas fa-retweet"></i>
+            <button className="level-item">
+              <span className="icon is-small">
+                <i className="fas fa-retweet"></i>
               </span>
             </button>
-            <button class="level-item">
-              <span class="icon is-small">
-                <i class="fas fa-heart"></i>
+            <button className="level-item">
+              <span className="icon is-small">
+                <i className="fas fa-heart"></i>
               </span>
             </button>
           </div>
         </nav>
       </div>
-      <div class="media-right">
-        <button class="delete"></button>
+      <div className="media-right">
+        <button className="delete"></button>
       </div>
     </article>
   );
 };
+
 export default Post;
