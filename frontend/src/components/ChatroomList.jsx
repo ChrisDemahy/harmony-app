@@ -12,24 +12,39 @@ const ChatroomList = ({ rooms }) => {
     }, [dispatch]);
 
     return (
-        <div className="section">
-            <div className="columns is-mobile">
-                <aside className="column is-2 aside">
-                    <label className="menu-label">Chatroom List</label>
-                    <ul className="menu-list">
-                        {chatrooms &&
-                            chatrooms.map((room) => (
-                                <li key={room.id}>
-                                    <a>{room.name}</a>
-                                </li>
-                            ))}
+        <aside className="menu">
+            <p className="menu-label">Text Channels</p>
+            <ul className="menu-list">
+                {chatrooms &&
+                    chatrooms.map((chatroom) => {
+                        return (
+                            <li>
+                                <a>{chatroom.name}</a>
+                            </li>
+                        );
+                    })}
+            </ul>
+            <p className="menu-label">Voice Channels</p>
+            <ul className="menu-list">
+                <li>
+                    <a>Team 1</a>
+                </li>
+                {/* <li>
+                    <a className="is-active">Manage Your Team</a>
+                    <ul>
+                        <li>
+                            <a>Members</a>
+                        </li>
+                        <li>
+                            <a>Plugins</a>
+                        </li>
+                        <li>
+                            <a>Add a member</a>
+                        </li>
                     </ul>
-                    <a className="button is-success is-block is-bold">
-                        Create New Room
-                    </a>
-                </aside>
-            </div>
-        </div>
+                </li> */}
+            </ul>
+        </aside>
     );
 };
 
