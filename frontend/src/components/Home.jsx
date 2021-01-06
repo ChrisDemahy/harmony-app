@@ -1,6 +1,6 @@
 import React from "react";
 import ChatroomList from "./ChatroomList";
-import Chatroom from "./Chatroom";
+
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 

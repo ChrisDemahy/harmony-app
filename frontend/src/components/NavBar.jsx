@@ -7,7 +7,7 @@ const NavBar = ({ user, handleLogout }) => {
       <div className="navbar-menu">
         <div className="navbar-start">
           <div className="navbar-item">
-            <a className="container title is-4 has-text-white">harmony💬</a>
+            {/* <a className="container title is-4 has-text-white">harmony💬</a> */}
           </div>
           <div className="navbar-item">
             <div className="container">
@@ -21,13 +21,13 @@ const NavBar = ({ user, handleLogout }) => {
         </div>
         <div className="navbar-end">
           <div className="navbar-item">
-            <a className="container title is-4 has-text-primary">
-              {user.username}
-            </a>
+            {/* <a className="container title is-4 has-text-primary"> */}
+              {/* {user.username} */}
+            {/* </a> */}
           </div>
-          <a className="navbar-item subtitle is-6" onClick={handleLogout}>
+          {/* <a className="navbar-item subtitle is-6" onClick={handleLogout}>
             Log Out
-          </a>
+          </a> */}
         </div>
       </div>
     </nav>

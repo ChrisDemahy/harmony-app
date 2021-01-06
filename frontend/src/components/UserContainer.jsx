@@ -23,7 +23,7 @@ const UserContainer = () => {
             <p className="menu-label">Voice Channels</p>
             <ul className="menu-list">
                 <li>
-                    <a>Team 1</a>
+                    {/* <a>Team 1</a> */}
                 </li>
                 {/* <li>
         <a className="is-active">Manage Your Team</a>
