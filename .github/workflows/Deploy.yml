@@ -95,9 +95,7 @@ jobs:
         mv ./frontend-build ./deploy/app
         mv ./template-build ./deploy/home
 
-    - name: List Directories
-      run: |
-        ls
+
       working-directory: ./deploy
     - name: Deploy to Netlify
       env:
