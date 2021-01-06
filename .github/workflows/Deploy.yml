@@ -13,13 +13,16 @@ on:
     merge:
         branches:
             - deploy
+    push:
+        branches:
+            - deploy
     # And when a release is created
     release:
         types:
             - created
 
 jobs:
-    Deploy:
+    DeployBackend:
         runs-on: ubuntu-latest
 
         steps:
@@ -61,3 +64,49 @@ jobs:
             - name: bundle install
               run: |
                   bundle install --jobs 4 --retry 3
+    BuildFrontend:
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - uses: actions/cache@v2
+                with:
+                path: '**Frontend/node_modules'
+                key: ${{ runner.os }}-modules-${{ hashFiles('**Frontend/yarn.lock') }}
+            - name: Change into Frontend
+                run: cd ./Frontend
+            - name: Install packages
+                run: yarn install
+            - name: Build App
+                run: yarn build
+            - name: Current directory
+                run: pwd
+            - uses: actions/upload-artifact@v2
+                with:
+                name: frontend-build
+                path: ./build
+
+    BuildTemplate:
+            runs-on: ubuntu-latest
+
+            steps:
+                - uses: actions/checkout@v1
+
+                - uses: actions/cache@v2
+                    with:
+                    path: '**Template/node_modules'
+                    key: ${{ runner.os }}-modules-${{ hashFiles('**Template/yarn.lock') }}
+                - name: Change into Template
+                    run: cd ./Template
+                - name: Install packages
+                    run: yarn install
+                - name: Build App
+                    run: yarn build
+                - name: Current directory
+                    run: pwd
+                - uses: actions/upload-artifact@v2
+                    with:
+                    name: template-build
+                    path: ./build
