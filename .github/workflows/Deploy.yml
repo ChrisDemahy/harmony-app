@@ -45,7 +45,9 @@ jobs:
       with: 
         node-version: "12"
         check-latest: true
-
+    - name: List Directories
+      run: |
+        ls
     - name: Install Dependencies
       run: |
         yarn install
