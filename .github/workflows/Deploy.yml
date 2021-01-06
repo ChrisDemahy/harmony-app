@@ -55,13 +55,13 @@ jobs:
     - name: Install Dependencies
       run: |
         yarn install
-      working-directory: ./template
+      working-directory: ./Template
     - name: Install Dependencies
       run: |
         yarn build
-      working-directory: ./template
+      working-directory: ./Template
     - name: Upload Build
       uses: actions/upload-artifact@v2
       with:
         name: template-build
-        path: ./template/build
+        path: ./Template/build
