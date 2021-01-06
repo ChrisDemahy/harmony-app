@@ -80,7 +80,7 @@ jobs:
     
     - name: Move Redirects file
       run: |
-        mv ./_redirects ./deploy
+        mv ./_redirects ./deploy/_redirects
     - name: Setup Netlify CLI
       run: |
         yarn add netlify-cli
