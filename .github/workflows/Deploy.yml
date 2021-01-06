@@ -87,7 +87,11 @@ jobs:
       working-directory: ./deploy
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v2
-      working-directory: ./deploy
+    - name: Move artifacts to deploy directory
+      run: |
+        mv ./frontend-build ./deploy/app
+        mv ./template-build ./deploy/home
+
     - name: List Directories
       run: |
         ls
