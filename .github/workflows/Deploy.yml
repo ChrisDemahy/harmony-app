@@ -69,12 +69,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v1
-
-            - uses: actions/cache@v2
-                with:
-                path: '**Frontend/node_modules'
-                key: ${{ runner.os }}-modules-${{ hashFiles('**Frontend/yarn.lock') }}
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+            with:
+                node-version: '12'
             - name: Change into Frontend
                 run: cd ./Frontend
             - name: Install packages
@@ -84,29 +82,27 @@ jobs:
             - name: Current directory
                 run: pwd
             - uses: actions/upload-artifact@v2
-                with:
+            with:
                 name: frontend-build
                 path: ./build
 
     BuildTemplate:
             runs-on: ubuntu-latest
 
-            steps:
-                - uses: actions/checkout@v1
-
-                - uses: actions/cache@v2
-                    with:
-                    path: '**Template/node_modules'
-                    key: ${{ runner.os }}-modules-${{ hashFiles('**Template/yarn.lock') }}
-                - name: Change into Template
-                    run: cd ./Template
-                - name: Install packages
-                    run: yarn install
-                - name: Build App
-                    run: yarn build
-                - name: Current directory
-                    run: pwd
-                - uses: actions/upload-artifact@v2
-                    with:
-                    name: template-build
-                    path: ./build
+           steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+            with:
+                node-version: '12'
+            - name: Change into Template
+                run: cd ./Template
+            - name: Install packages
+                run: yarn install
+            - name: Build App
+                run: yarn build
+            - name: Current directory
+                run: pwd
+            - uses: actions/upload-artifact@v2
+            with:
+                name: template-build
+                path: ./build
