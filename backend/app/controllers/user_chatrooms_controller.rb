@@ -46,6 +46,6 @@ class UserChatroomsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_chatroom_params
-      params.require(:user_chatroom).permit(:User_id, :Chatroom_id)
+      params.require(:user_chatroom).permit(:user_id, :chatroom_id)
     end
 end

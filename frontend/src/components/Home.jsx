@@ -3,6 +3,7 @@ import ChatroomList from "./ChatroomList";
 import Chatroom from "./Chatroom";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
+import { connect } from "react-redux";
 
 class Home extends React.Component {
   state = {
@@ -11,7 +12,7 @@ class Home extends React.Component {
 
   // Load up the chatrooms
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.props.user.id}`)
+    fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
       .then((resp) => resp.json())
       .then((data) => {
         // console.log(data.chatrooms);
@@ -30,17 +31,11 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <NavBar user={this.props.user} handleLogout={this.handleLogout} />
-        {/* <div className="box">
-          <h1 className="title is-1 has-text-centered">
-            Welcome {this.props.user.username}
-          </h1>
-          <button className="button" onClick={this.handleLogout}>
-            Log Out
-          </button>
-        </div> */}
+        <NavBar
+          user={this.props.currentUser}
+          handleLogout={this.handleLogout}
+        />
         <ChatroomList rooms={this.state.chatrooms} />
-        {/* const Chat = ({saveMsg}) => ( */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -66,14 +61,11 @@ class Home extends React.Component {
   }
 }
 
-export default withRouter(Home);
+const mapStateToProps = (state) => {
+  return { currentUser: state.userState.currentUser };
+};
 
-// const Home = () => {
-//   return (
-//     <div>
-//       <p className="section">Harmony, a messaging app for awesome people.</p>
-//     </div>
-//   );
-// };
+// export default withRouter(Home);
 
-// export default Home;
+const ShowTheLocationWithRouter = withRouter(Home);
+export default connect(mapStateToProps)(ShowTheLocationWithRouter);

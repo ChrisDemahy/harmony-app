@@ -11,26 +11,31 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     #BEFORE
-    # render json: @user
-
-    # # Get the relationships related to the user
-    # user_chatrooms = UserChatroom.where(user_id: @user.id)
-    # # Use that relationship to find chatrooms
-    # ids = user_chatrooms.map{|object| object.chatroom_id}
-    # render json: us
-    render json: @user, include: [:chatrooms, :user_chatrooms]
+    # render json: @user, include: [:chatrooms, :user_chatrooms]
+    render json: @user.to_json(    
+      include: [
+        { chatrooms: { only: :name } },
+        { user_chatrooms:
+          { except: [:created_at, :updated_at] } 
+        }
+      ]
+    ) 
 
   end
 
   # POST /users
   def create
     @user = User.new(user_params)
-
-    if @user.save
-      render json: @user, status: :created, location: @user
+    # byebug
+    if @user.valid?
+      @user.save
+      payload = { user_id: @user.id }
+      token = JWT.encode(payload, "harmony")
+      render json: { auth_key: token, user: @user }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { error: "Invalid User"}, status: :unprocessable_entity
     end
+
   end
 
   # PATCH/PUT /users/1
@@ -55,6 +60,8 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username)
+      params.permit(:username, :password, :password_confirmation)
+      # params.require(:user).permit(:username, password)
     end
+
 end
