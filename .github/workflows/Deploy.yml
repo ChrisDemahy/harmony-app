@@ -1,108 +1,27 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
-# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+  
+name: Django CI
 
-name: Deploy Web App to Heroku
-
-# Triggers the workflow
 on:
-    # But only on merge with the deploy branch
-    merge:
-        branches:
-            - deploy
-    push:
-        branches:
-            - deploy
-    # And when a release is created
-    release:
-        types:
-            - created
+  push:
+    branches: [ deploy ]
+  pull_request:
+    branches: [ deploy ]
 
 jobs:
-    DeployBackend:
-        runs-on: ubuntu-latest
+  build:
 
-        steps:
-            - uses: actions/checkout@v2
-            # Setup bundle cache
-            - name: Setup Cache
-              uses: actions/cache@v2
-              with:
-                  path: vendor/bundle
-                  key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-gems-
+    runs-on: ubuntu-latest
+ 
 
-            - name: Set up Ruby
-              # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-              # change this to (see https://github.com/ruby/setup-ruby#versioning):
-              uses: ruby/setup-ruby@v1
-              # uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
-              with:
-                  ruby-version: 2.6
-              run: sudo apt-get install ruby-full
-
-            - name: Ruby Version
-              run: |
-                  ruby -v
-
-            - name: Bundle Version
-              run: |
-                  bundle -v
-
-            - name: Configure Bundle
-              run: |
-                  bundle config path vendor/bundle
-
-            - name: Change into rails directory
-              run: |
-                  cd backend
-
-            - name: bundle install
-              run: |
-                  bundle install --jobs 4 --retry 3
-    BuildFrontend:
-
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
-            with:
-                node-version: '12'
-            - name: Change into Frontend
-                run: cd ./Frontend
-            - name: Install packages
-                run: yarn install
-            - name: Build App
-                run: yarn build
-            - name: Current directory
-                run: pwd
-            - uses: actions/upload-artifact@v2
-            with:
-                name: frontend-build
-                path: ./build
-
-    BuildTemplate:
-            runs-on: ubuntu-latest
-
-           steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
-            with:
-                node-version: '12'
-            - name: Change into Template
-                run: cd ./Template
-            - name: Install packages
-                run: yarn install
-            - name: Build App
-                run: yarn build
-            - name: Current directory
-                run: pwd
-            - uses: actions/upload-artifact@v2
-            with:
-                name: template-build
-                path: ./build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+    - name: Change Directory
+      run: |
+        cd frontend
+    - name: Install Dependencies
+      run: |
+        yarn install
+    
