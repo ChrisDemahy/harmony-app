@@ -71,6 +71,9 @@ jobs:
     needs: [BuildFrontend, BuildTemplate]
     steps:
     - uses: actions/checkout@v2
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       with:
         ref: deploy
     - uses: actions/setup-node@v2
@@ -100,8 +103,6 @@ jobs:
       working-directory: ./deploy
     - name: Deploy to Netlify
       run: netlify deploy --dir=deploy --prod
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      
     
     
