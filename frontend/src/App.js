@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Chatroom from "./components/Chatroom";
+// import Chatroom from "./components/Chatroom";
 import Home from "./components/Home";
-import Login from "./components/Login";
+// import Login from "./components/Login";
 import UserContainer from "./components/UserContainer";
 import ChatroomList from "./components/ChatroomList";
 import Nav from "./components/Nav";
