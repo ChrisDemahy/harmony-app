@@ -20,7 +20,7 @@ jobs:
         node-version: "12"
     - name: Change Directory
       run: |
-        cd frontend
+        ls
     - name: Install Dependencies
       run: |
         yarn install
