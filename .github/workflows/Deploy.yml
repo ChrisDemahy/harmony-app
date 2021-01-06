@@ -8,8 +8,10 @@ on:
     branches: [ deploy ]
 
 jobs:
+  
   BuildFrontend:
-
+    environment:
+      name: production
     runs-on: ubuntu-latest
  
 
@@ -69,6 +71,7 @@ jobs:
   DeployToNetlify:
     runs-on: ubuntu-latest
     needs: [BuildFrontend, BuildTemplate]
+    
     steps:
     
     - uses: actions/checkout@v2
@@ -96,9 +99,6 @@ jobs:
         mv ./template-build ./deploy/home
 
     - name: Deploy to Netlify
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       run: netlify deploy --dir=deploy --prod
       
     
