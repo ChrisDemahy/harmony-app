@@ -18,14 +18,13 @@ jobs:
     - uses: actions/setup-node@v2
       with: 
         node-version: "12"
-    - name: Change Directory
-      run: |
-        cd ./frontend
-        pwd
+
     - name: Install Dependencies
       run: |
         yarn install
+      working-directory: ./frontend
     - name: Install Dependencies
       run: |
         yarn build
+      working-directory: ./frontend
     
