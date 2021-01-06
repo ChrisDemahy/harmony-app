@@ -8,8 +8,8 @@ on:
     branches: [ deploy ]
 
 jobs:
-  
   BuildFrontend:
+
     runs-on: ubuntu-latest
  
 
@@ -29,6 +29,8 @@ jobs:
     - name: Build
       run: |
         yarn build
+      env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}/app
       working-directory: ./frontend
     - name: Upload Build
       uses: actions/upload-artifact@v2
@@ -39,7 +41,7 @@ jobs:
   BuildTemplate:
 
     runs-on: ubuntu-latest
-
+ 
 
     steps:
     - uses: actions/checkout@v2
@@ -59,6 +61,9 @@ jobs:
     - name: Build
       run: |
         yarn build
+      env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}/home
+          
       working-directory: ./Template
     - name: Upload Build
       uses: actions/upload-artifact@v2
@@ -69,9 +74,6 @@ jobs:
   DeployToNetlify:
     runs-on: ubuntu-latest
     needs: [BuildFrontend, BuildTemplate]
-    environment:
-      name: production
-      
     steps:
     
     - uses: actions/checkout@v2
@@ -99,6 +101,9 @@ jobs:
         mv ./template-build ./deploy/home
 
     - name: Deploy to Netlify
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       run: netlify deploy --dir=deploy --prod
       
     
