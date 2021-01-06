@@ -86,7 +86,7 @@ jobs:
     - name: Setup Netlify CLI
       run: |
         yarn add netlify-cli
-      working-directory: ./deploy
+    #   working-directory: ./deploy
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v2
     - name: Move artifacts to deploy directory
