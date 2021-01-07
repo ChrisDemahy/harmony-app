@@ -3,9 +3,9 @@ import { withRouter } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
-import { userLogin } from "../actions/authActions";
+import { userSignup } from "../actions/authActions";
 
-class Login extends React.Component {
+class Signup extends React.Component {
   state = {
     username: "",
     password: "",
@@ -19,7 +19,7 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.userLogin(this.state);
+    this.props.userSignup(this.state);
     // if user is verified, redirect to home route
     setTimeout(() => {
       let user_id = this.props.currentUser.id;
@@ -36,7 +36,7 @@ class Login extends React.Component {
         <div className="hero-body">
           <div className="container">
             {/* <h1 className="title is-1 has-text-centered">Welcome to Harmony</h1> */}
-            <h1 className="title is-3 has-text-centered">Login</h1>
+            <h1 className="title is-3 has-text-centered">Sign Up</h1>
             <div className="columns is-centered">
               <div className="column is-5-tablet is-4-desktop is-3-widescreen">
                 <form
@@ -77,11 +77,11 @@ class Login extends React.Component {
                     </div>
                   </div>
                   <div className="field">
-                    <button className="button is-success">Login</button>
+                    <button className="button is-success">Signup</button>
                   </div>
                 </form>
                 <div className="button">
-                  <a href="/signup">Create New Account</a>
+                  <a href="/login">Back to Log in</a>
                 </div>
               </div>
             </div>
@@ -92,17 +92,10 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { currentUser: state.userState.currentUser };
-};
-
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (user) => dispatch(userLogin(user)),
+  userSignup: (userInfo) => dispatch(userSignup(userInfo)),
 });
 
-// export default withRouter(Login);
-const ShowTheLocationWithRouter = withRouter(Login);
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShowTheLocationWithRouter);
+// export default withRouter(Signup);
+const ShowTheLocationWithRouter = withRouter(Signup);
+export default connect(null, mapDispatchToProps)(ShowTheLocationWithRouter);
