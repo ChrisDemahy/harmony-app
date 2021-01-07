@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 
-import ChatroomList from "../containers/ChatroomList";
+
 
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-
-class Home extends React.Component {
-  state = {
-    chatrooms: [],
-    posts: [],
-  };
 
 class Home extends Component {
   // Load up the chatrooms
