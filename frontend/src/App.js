@@ -6,19 +6,18 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 import { connect } from "react-redux";
 import Chatroom from "./components/Chatroom";
 import Home from "./components/Home";
 import Login from "./components/Login";
-import Signup from "./components/Signup";
+
 
 import UserContainer from "./components/UserContainer";
 import ChatroomList from "./components/ChatroomList";
 import Nav from "./components/Nav";
-import {createBrowserHistory} from 'history'
+
 class App extends React.Component {
   render() {
     let user_id = this.props.currentUser.id;
