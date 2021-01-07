@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Post from "./Post";
+import React, { useEffect } from "react";
+import Post from "../components/Post";
 
 const socketClient = new WebSocket("ws://localhost:3000/cable");
 

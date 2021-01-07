@@ -1,3 +1,4 @@
+
 export const userSignup = (user) => {
   return (dispatch) => {
     let options = {
@@ -8,7 +9,7 @@ export const userSignup = (user) => {
         Accept: "application/json",
       },
     };
-    return fetch("http://localhost:3000/users", options)
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, options)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.hasOwnProperty("auth_key")) {
@@ -32,7 +33,7 @@ export const userLogin = (user) => {
         Accept: "application/json",
       },
     };
-    return fetch("http://localhost:3000/login", options)
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, options)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.hasOwnProperty("auth_key")) {

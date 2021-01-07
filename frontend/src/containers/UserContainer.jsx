@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import User from "./User";
+import User from "../components/User";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../lib/apiClient";
 

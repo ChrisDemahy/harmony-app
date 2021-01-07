@@ -1,19 +1,15 @@
-import React from "react";
-import ChatroomList from "./ChatroomList";
-import Chatroom from "./Chatroom";
+import React, { Component } from "react";
+
+
+
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-class Home extends React.Component {
-  state = {
-    chatrooms: [],
-    posts: [],
-  };
-
-  // LOAD UP THE POSTS
+class Home extends Component {
+  // Load up the chatrooms
   componentDidMount() {
-    fetch(`http://localhost:3000/chatrooms/1`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.currentUser.id}`)
       .then((resp) => resp.json())
       .then((data) => {
         // console.log(data.posts);
@@ -48,11 +44,7 @@ class Home extends React.Component {
           user={this.props.currentUser}
           handleLogout={this.handleLogout}
         />
-        <section className="main-content columns is-fullheight">
-          <ChatroomList rooms={this.state.chatrooms} />
-          <Chatroom posts={this.state.posts} />
-        </section>
-        {/* TEXT FORM */}
+        {/* <ChatroomList rooms={this.state.chatrooms} /> */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
