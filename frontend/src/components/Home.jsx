@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 
 import ChatroomList from "./ChatroomList";
-import Chatroom from "./Chatroom";
+
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 
-
+class Home extends Component {
   // Load up the chatrooms
   componentDidMount() {
     fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
