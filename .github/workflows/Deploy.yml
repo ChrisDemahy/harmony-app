@@ -146,7 +146,7 @@ jobs:
         yarn add heroku
     - name: Add Heroku Remote
       run: |
-        heroku git:remote -a backend
+        heroku git:remote -a harmony-app-api
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     - name: Push to Heroku
