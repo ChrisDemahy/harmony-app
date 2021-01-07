@@ -129,3 +129,27 @@ jobs:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       run: netlify deploy --dir=template-build --prod
+
+  DeployRailsToHeroku:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+    - name: Setup Heroku CLI
+      run: |
+        yarn add heroku
+    - name: Add Heroku Remote
+      run: |
+        heroku git:remote -a backend
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    - name: Push to Heroku
+      run: |
+        git subtree push --prefix backend heroku main
+      
