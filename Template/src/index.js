@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 //import './App.css';
 import './assets/scss/style.scss';
 
-const history = createBrowserHistory({ basename: '/app' });
+const history = createBrowserHistory({ basename: '/home' });
 
 
 ReactDOM.render(

@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import UserContainer from "./components/UserContainer";
 import ChatroomList from "./components/ChatroomList";
 import Nav from "./components/Nav";
-
+import {createBrowserHistory} from 'history'
 class App extends React.Component {
     state = {
         user: null,
@@ -20,30 +20,34 @@ class App extends React.Component {
         });
     };
 
+    history = createBrowserHistory({ basename: '/app' });
+
     render() {
         return (
             <Router basename="/app">
-                <header>
-                    <Nav />
-                </header>
-                <main className="section">
-                    <Switch>
-                        <Route path="/chatrooms" children={<ChatroomList />} />
-                        <Route path="/chatroom/:id">
-                            <div class="columns">
-                                <ChatroomList className="column" />
-                                <div className="column">
-                                    {/* <Chatroom /> */}
+                
+                    <header>
+                        <Nav />
+                    </header>
+                    <main className="section">
+                        <Switch>
+                            <Route path="/chatrooms" children={<ChatroomList />} />
+                            <Route path="/chatroom/:id">
+                                <div class="columns">
+                                    <ChatroomList className="column" />
+                                    <div className="column">
+                                        {/* <Chatroom /> */}
+                                    </div>
+                                    <UserContainer />
                                 </div>
-                                <UserContainer />
-                            </div>
-                        </Route>
-                        <Route path="/users">{/* <UserContainer /> */}</Route>
-                        <Route path="/">
-                            <Home />
-                        </Route>
-                    </Switch>
-                </main>
+                            </Route>
+                            <Route path="/users">{/* <UserContainer /> */}</Route>
+                            <Route path="/">
+                                <Home />
+                            </Route>
+                        </Switch>
+                    </main>
+                
             </Router>
         );
     }
