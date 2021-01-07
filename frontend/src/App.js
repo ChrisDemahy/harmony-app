@@ -22,7 +22,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router>
+            <Router basename="/app">
                 <header>
                     <Nav />
                 </header>

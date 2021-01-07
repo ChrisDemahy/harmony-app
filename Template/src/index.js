@@ -9,7 +9,8 @@ import * as serviceWorker from './serviceWorker';
 //import './App.css';
 import './assets/scss/style.scss';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({ basename: '/app' });
+
 
 ReactDOM.render(
   <Router history={history}>
