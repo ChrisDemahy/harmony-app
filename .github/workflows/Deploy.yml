@@ -135,25 +135,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
       with:
-        ref: deploy
-    - uses: actions/setup-node@v2
-      with: 
-        node-version: "12"
-        check-latest: true
-    - name: Setup Heroku CLI
-      run: |
-        yarn add heroku
-    - name: Heroku Setup
-      run: |
-        heroku login
-
-    - name: Add Heroku Remote
-      run: |
-        heroku git:remote -a harmony-app-api
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-    - name: Push to Heroku
-      run: |
-        git subtree push --prefix backend heroku main
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP}} #Must be unique in Heroku
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        appdir: "backend" # <- This will point to the api folder in your project
       
