@@ -29,8 +29,8 @@ jobs:
     - name: Build
       run: |
         yarn build
-      # env:
-      #     PUBLIC_URL: /app
+      env:
+          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
       working-directory: ./frontend
     - name: Upload Build
       uses: actions/upload-artifact@v2

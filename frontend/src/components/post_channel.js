@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const socketClient = new WebSocket("ws://localhost:3000/cable");
+const socketClient = new WebSocket(`${process.env.REACT_APP_BACKEND_URL}/cable`);
 
 function PostChannel() {
   const [posts, setPosts] = useState([]);

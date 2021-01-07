@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000";
+const URL = process.env.REACT_APP_BACKEND_URL
 
 // Thunk function to fetch all chatrooms
 async function fetchChatrooms(dispatch, getState) {

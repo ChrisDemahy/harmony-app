@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 class Home extends Component {
   // Load up the chatrooms
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.currentUser.id}`)
       .then((resp) => resp.json())
       .then((data) => {
         // console.log(data.chatrooms);
@@ -32,7 +32,7 @@ class Home extends Component {
           user={this.props.currentUser}
           handleLogout={this.handleLogout}
         />
-        <ChatroomList rooms={this.state.chatrooms} />
+        {/* <ChatroomList rooms={this.state.chatrooms} /> */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
