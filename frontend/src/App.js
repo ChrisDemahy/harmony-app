@@ -9,13 +9,13 @@ import {
   Redirect,
 } from "react-router-dom";
 import { connect } from "react-redux";
-import Chatroom from "./components/Chatroom";
+import Chatroom from "./containers/Chatroom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
 
-import UserContainer from "./components/UserContainer";
-import ChatroomList from "./components/ChatroomList";
+import UserContainer from "./containers/UserContainer";
+import ChatroomList from "./containers/ChatroomList";
 import Nav from "./components/Nav";
 
 class App extends React.Component {
