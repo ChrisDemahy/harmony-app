@@ -3,14 +3,15 @@ class ChatroomsController < ApplicationController
 
   # GET /chatrooms
   def index
-    @chatrooms = Chatroom.all
+    @chatrooms = Chatroom.all   
 
     render json: @chatrooms
   end
 
   # GET /chatrooms/1
-  def show
-    render json: @chatroom
+  def show    
+    posts = @chatroom.posts.map{ |post, user| user=[post.user.username, post.user.avatar], post }
+    render json: { chatroom: @chatroom, posts: posts }
   end
 
   # POST /chatrooms
