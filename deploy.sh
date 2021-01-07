@@ -1,13 +1,18 @@
 rm -r deploy
-mkdir deploy
-cp ./_redirects ./deploy/_redirects
+
+
+cd ./template
+export PUBLIC_URL=""
+yarn build 
+mv ./build ../deploy
+
 cd ./frontend
 export PUBLIC_URL="/app"
 yarn build
 mv ./build ../deploy/app
-cd ../template
-export PUBLIC_URL="/home"
-yarn build 
-mv ./build ../deploy/home
+
+cp ../_redirects ./deploy/_redirects
+
+
 cd ..
 netlify deploy --prod --dir=deploy

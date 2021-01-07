@@ -71,9 +71,9 @@ jobs:
         name: template-build
         path: ./Template/build
 
-  DeployToNetlify:
+  DeployFrontend:
     runs-on: ubuntu-latest
-    needs: [BuildFrontend, BuildTemplate]
+    needs: [BuildFrontend]
     steps:
     
     - uses: actions/checkout@v2
@@ -83,28 +83,46 @@ jobs:
       with: 
         node-version: "12"
         check-latest: true
-    - name: Make Directory for deploy
-      run: |
-        mkdir deploy
-    - name: Move Redirects file
-      run: |
-        mv ./_redirects ./deploy/_redirects
     - name: Setup Netlify CLI
       run: |
         yarn add netlify-cli
     #   working-directory: ./deploy
-    - name: Download all workflow run artifacts
+    
+    - name: Download a single artifact
       uses: actions/download-artifact@v2
-    - name: Move artifacts to deploy directory
+      with:
+        name: frontend-build
+
+    - name: Deploy to Netlify
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.FRONTEND_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      run: netlify deploy --dir=frontend-build --prod
+      
+  DeployTemplate:
+    runs-on: ubuntu-latest
+    needs: [BuildTemplate]
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+    - name: Setup Netlify CLI
       run: |
-        mv ./frontend-build ./deploy/app
-        mv ./template-build ./deploy/home
+        yarn add netlify-cli
+    #   working-directory: ./deploy
+    
+    - name: Download a single artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: template-build
 
     - name: Deploy to Netlify
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      run: netlify deploy --dir=deploy --prod
-      
-    
-    
+      run: netlify deploy --dir=template-build --prod
