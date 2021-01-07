@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import User from "./User";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../lib/apiClient";
+
 const UserContainer = () => {
     const users = useSelector((state) => state.userState.users);
     console.log(users);

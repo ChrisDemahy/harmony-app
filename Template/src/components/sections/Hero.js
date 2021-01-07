@@ -60,17 +60,18 @@ const Hero = ({
                             className="mt-0 mb-16 reveal-from-bottom"
                             data-reveal-delay="200"
                         >
-                            Landing template for{" "}
-                            <span className="text-color-primary">startups</span>
+                            Your place to talk
                         </h1>
                         <div className="container-xs">
                             <p
                                 className="m-0 mb-32 reveal-from-bottom"
                                 data-reveal-delay="400"
                             >
-                                Our landing page template works on all devices,
-                                so you only have to set it up once, and get
-                                beautiful results forever.
+                                Whether you’re part of a school club, gaming
+                                group, worldwide art community, or just a
+                                handful of friends that want to spend time
+                                together, Discord makes it easy to talk every
+                                day and hang out more often.
                             </p>
                             <div
                                 className="reveal-from-bottom"
