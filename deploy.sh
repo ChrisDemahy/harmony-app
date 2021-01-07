@@ -7,7 +7,7 @@ yarn build
 mv ./build ../deploy
 
 cd ./frontend
-export PUBLIC_URL="/app"
+export PUBLIC_URL=""
 yarn build
 mv ./build ../deploy/app
 
