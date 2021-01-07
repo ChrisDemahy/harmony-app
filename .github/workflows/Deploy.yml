@@ -120,7 +120,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: template-build
-
+    - name: Copy redirects into folder
+      run: |
+        mv ./_redirects ./template-build/_redirects
     - name: Deploy to Netlify
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
