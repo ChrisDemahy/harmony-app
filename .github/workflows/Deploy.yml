@@ -87,10 +87,8 @@ jobs:
       run: |
         yarn add netlify-cli
     #   working-directory: ./deploy
-    - name: Download a single artifact
+    - name: Download all artifacts
       uses: actions/download-artifact@v2
-      with:
-        name: frontend-build
     - name: List Directories
       run: |
         ls
@@ -117,10 +115,9 @@ jobs:
       run: |
         yarn add netlify-cli
     #   working-directory: ./deploy
-    - name: Download a single artifact
+    - name: Download all artifacts
       uses: actions/download-artifact@v2
-      with:
-        name: template-build
+      
     - name: List Directories
       run: |
         ls
