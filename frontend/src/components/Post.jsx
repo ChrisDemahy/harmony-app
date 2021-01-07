@@ -5,11 +5,9 @@ const Post = ({ post }) => {
   };
 
   // destructuring the post
-  console.log(post);
+  // console.log(post);
   let user, msg, username, avatar;
   [user, msg] = post;
-  // [username, avatar] = { user };
-  // console.log(username);
 
   return (
     <article className="media">
