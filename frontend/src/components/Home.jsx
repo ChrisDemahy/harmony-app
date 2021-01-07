@@ -6,6 +6,11 @@ import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
+class Home extends React.Component {
+  state = {
+    chatrooms: [],
+    posts: [],
+  };
 
 class Home extends Component {
   // Load up the chatrooms
@@ -13,17 +18,30 @@ class Home extends Component {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.currentUser.id}`)
       .then((resp) => resp.json())
       .then((data) => {
-        // console.log(data.chatrooms);
+        // console.log(data.posts);
         this.setState({
-          chatrooms: data.chatrooms,
+          posts: data.posts,
         });
       });
   }
 
+  // // Load up the chatrooms
+  // componentDidMount() {
+  //   fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       // console.log(data.chatrooms);
+  //       this.setState({
+  //         chatrooms: data.chatrooms,
+  //       });
+  //     });
+  // }
 
-
-
-
+  handleLogout = (event) => {
+    event.preventDefault();
+    this.props.setUser(null);
+    this.props.history.push("/login");
+  };
 
   render() {
     return (

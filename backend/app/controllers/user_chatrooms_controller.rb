@@ -1,51 +1,67 @@
-class UserChatroomsController < ApplicationController
-  before_action :set_user_chatroom, only: [:show, :update, :destroy]
+class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update, :destroy]
 
-  # GET /user_chatrooms
+  # GET /users
   def index
-    @user_chatrooms = UserChatroom.all
+    @users = User.all
 
-    render json: @user_chatrooms
+    render json: @users
   end
 
-  # GET /user_chatrooms/1
+  # GET /users/1
   def show
-    render json: @user_chatroom
+    #BEFORE
+    # render json: @user, include: [:chatrooms, :user_chatrooms]
+    
+    # AFTER
+    render json: @user.to_json(    
+      include: [
+        { chatrooms: { except: [:created_at, :updated_at] }  },
+        { user_chatrooms: { except: [:created_at, :updated_at] } }
+      ]
+    ) 
+
   end
 
-  # POST /user_chatrooms
+  # POST /users
   def create
-    @user_chatroom = UserChatroom.new(user_chatroom_params)
-
-    if @user_chatroom.save
-      render json: @user_chatroom, status: :created, location: @user_chatroom
+    @user = User.new(user_params)
+    # byebug
+    if @user.valid?
+      @user.save
+      payload = { user_id: @user.id }
+      token = JWT.encode(payload, "harmony")
+      render json: { auth_key: token, user: @user }, status: :created
     else
-      render json: @user_chatroom.errors, status: :unprocessable_entity
+      render json: { error: "Invalid User"}, status: :unprocessable_entity
     end
+
   end
 
-  # PATCH/PUT /user_chatrooms/1
+  # PATCH/PUT /users/1
   def update
-    if @user_chatroom.update(user_chatroom_params)
-      render json: @user_chatroom
+    if @user.update(user_params)
+      render json: @user
     else
-      render json: @user_chatroom.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /user_chatrooms/1
+  # DELETE /users/1
   def destroy
-    @user_chatroom.destroy
+    @user.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user_chatroom
-      @user_chatroom = UserChatroom.find(params[:id])
+    def set_user
+      @user = User.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def user_chatroom_params
-      params.require(:user_chatroom).permit(:user_id, :chatroom_id)
+    def user_params
+      params.permit(:username, :password, :password_confirmation)
+      # params.require(:user).permit(:username, password)
     end
+
 end
