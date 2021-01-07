@@ -30,7 +30,7 @@ jobs:
       run: |
         yarn build
       env:
-          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}/app
+          PUBLIC_URL: /app
       working-directory: ./frontend
     - name: Upload Build
       uses: actions/upload-artifact@v2
@@ -61,8 +61,8 @@ jobs:
     - name: Build
       run: |
         yarn build
-      env:
-          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}/home
+      # env:
+      #     PUBLIC_URL: /home
           
       working-directory: ./Template
     - name: Upload Build
