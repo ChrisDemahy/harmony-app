@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import User from "./User";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../lib/apiClient";
+
 const UserContainer = () => {
     const users = useSelector((state) => state.userState.users);
     console.log(users);
@@ -23,7 +24,7 @@ const UserContainer = () => {
             <p className="menu-label">Voice Channels</p>
             <ul className="menu-list">
                 <li>
-                    <a>Team 1</a>
+                    {/* <a>Team 1</a> */}
                 </li>
                 {/* <li>
         <a className="is-active">Manage Your Team</a>

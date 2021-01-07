@@ -1,0 +1,144 @@
+  
+name: Deploy Script
+
+on:
+  push:
+    branches: [ deploy ]
+  pull_request:
+    branches: [ deploy ]
+
+jobs:
+  BuildFrontend:
+
+    runs-on: ubuntu-latest
+ 
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+
+    - name: Install Dependencies
+      run: |
+        yarn install
+      working-directory: ./frontend
+    - name: Build
+      run: |
+        yarn build
+      env:
+          PUBLIC_URL: /app
+      working-directory: ./frontend
+    - name: Upload Build
+      uses: actions/upload-artifact@v2
+      with:
+        name: frontend-build
+        path: ./frontend/build
+    
+  BuildTemplate:
+
+    runs-on: ubuntu-latest
+ 
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+    - name: Install Dependencies
+      run: |
+        yarn install
+      working-directory: ./Template
+    - name: List Directories
+      run: |
+        ls
+    - name: Build
+      run: |
+        yarn build
+      # env:
+      #     PUBLIC_URL: /home
+          
+      working-directory: ./Template
+    - name: Upload Build
+      uses: actions/upload-artifact@v2
+      with:
+        name: template-build
+        path: ./Template/build
+
+  DeployFrontend:
+    runs-on: ubuntu-latest
+    needs: [BuildFrontend]
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+    - name: Setup Netlify CLI
+      run: |
+        yarn add netlify-cli
+    #   working-directory: ./deploy
+    - name: Download all artifacts
+      uses: actions/download-artifact@v2
+    - name: List Directories
+      run: |
+        ls
+
+    - name: Deploy to Netlify
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.FRONTEND_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      run: netlify deploy --dir=frontend-build --prod
+      
+  DeployTemplate:
+    runs-on: ubuntu-latest
+    needs: [BuildTemplate]
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        ref: deploy
+    - uses: actions/setup-node@v2
+      with: 
+        node-version: "12"
+        check-latest: true
+    - name: Setup Netlify CLI
+      run: |
+        yarn add netlify-cli
+    #   working-directory: ./deploy
+    - name: Download all artifacts
+      uses: actions/download-artifact@v2
+      
+    - name: List Directories
+      run: |
+        ls
+    - name: Copy redirects into folder
+      run: |
+        mv ./_redirects ./template-build/_redirects
+    - name: Deploy to Netlify
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      run: netlify deploy --dir=template-build --prod
+
+  DeployRailsToHeroku:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP}} #Must be unique in Heroku
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        appdir: "backend" # <- This will point to the api folder in your project
+      

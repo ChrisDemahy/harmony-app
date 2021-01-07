@@ -1,14 +1,12 @@
 import React from "react";
+
 import ChatroomList from "./ChatroomList";
 import Chatroom from "./Chatroom";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-class Home extends React.Component {
-  state = {
-    chatrooms: [],
-  };
+
 
   // Load up the chatrooms
   componentDidMount() {
@@ -22,11 +20,10 @@ class Home extends React.Component {
       });
   }
 
-  handleLogout = (event) => {
-    event.preventDefault();
-    this.props.setUser(null);
-    this.props.history.push("/login");
-  };
+
+
+
+
 
   render() {
     return (

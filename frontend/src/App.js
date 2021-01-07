@@ -1,6 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,10 +14,11 @@ import Chatroom from "./components/Chatroom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+
 import UserContainer from "./components/UserContainer";
 import ChatroomList from "./components/ChatroomList";
 import Nav from "./components/Nav";
-
+import {createBrowserHistory} from 'history'
 class App extends React.Component {
   render() {
     let user_id = this.props.currentUser.id;
@@ -52,6 +54,7 @@ class App extends React.Component {
       </Router>
     );
   }
+
 }
 
 const mapStateToProps = (state) => {
