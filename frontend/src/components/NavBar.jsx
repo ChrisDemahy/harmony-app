@@ -1,7 +1,7 @@
 import React from "react";
 
 const NavBar = ({ user, handleLogout }) => {
-  console.log(user);
+  // console.log(user);
   return (
     <nav className="navbar is-dark is-fixed-top">
       <div className="navbar-menu">
