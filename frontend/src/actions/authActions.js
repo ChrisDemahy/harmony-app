@@ -1,4 +1,3 @@
-
 export const userSignup = (user) => {
   return (dispatch) => {
     let options = {

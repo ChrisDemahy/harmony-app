@@ -13,7 +13,6 @@ import Chatroom from "./containers/Chatroom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
-
 import UserContainer from "./containers/UserContainer";
 import ChatroomList from "./containers/ChatroomList";
 import Nav from "./components/Nav";
@@ -28,13 +27,12 @@ class App extends React.Component {
         </header>
         <main className="section">
           <Switch>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
-            <Route path="/home">
+            <Route exact path="/home">
               <Home />
             </Route>
-            {user_id == null ? <Redirect to="/login" /> : <Redirect to="/" />}
             <Route path="/chatrooms" children={<ChatroomList />} />
             <Route path="/chatroom/:id">
               <div class="columns">
@@ -48,12 +46,12 @@ class App extends React.Component {
             <Route path="/users">
               <UserContainer />
             </Route>
+            {user_id == null ? <Redirect to="/login" /> : <Redirect to="/" />}
           </Switch>
         </main>
       </Router>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {

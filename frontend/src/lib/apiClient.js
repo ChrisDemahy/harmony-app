@@ -1,4 +1,4 @@
-const URL = process.env.REACT_APP_BACKEND_URL
+const URL = process.env.REACT_APP_BACKEND_URL;
 
 // Thunk function to fetch all chatrooms
 async function fetchChatrooms(dispatch, getState) {
@@ -13,4 +13,9 @@ async function fetchUsers(dispatch, getState) {
   const data = await response.json();
   dispatch({ type: "SET_USERS", users: data });
 }
-export { fetchUsers, fetchChatrooms };
+
+async function changeChatroom(dispatch, chatroom) {
+  dispatch({ type: "CHANGE_CURRENT_CHATROOM", chatroom: chatroom });
+}
+
+export { fetchUsers, fetchChatrooms, changeChatroom };

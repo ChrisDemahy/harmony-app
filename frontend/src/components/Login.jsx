@@ -26,7 +26,7 @@ class Login extends React.Component {
       if (user_id != null) {
         this.props.history.push("/home");
       }
-    }, 500);
+    }, 100);
   };
 
   render() {

@@ -1,34 +1,22 @@
-import React, { Component } from "react";
-
-
-
+import React, { Component, useState } from "react";
 import NavBar from "./NavBar";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import ChatroomList from "../containers/ChatroomList";
+import Chatroom from "../containers/Chatroom";
+import { useDispatch, useSelector } from "react-redux";
 
 class Home extends Component {
-  // Load up the chatrooms
-  componentDidMount() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.currentUser.id}`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        // console.log(data.posts);
-        this.setState({
-          posts: data.posts,
-        });
-      });
-  }
-
   // // Load up the chatrooms
   // componentDidMount() {
-  //   fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       // console.log(data.chatrooms);
-  //       this.setState({
-  //         chatrooms: data.chatrooms,
-  //       });
+  // fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
+  //   .then((resp) => resp.json())
+  //   .then((data) => {
+  //     // console.log(data.chatrooms);
+  //     this.setState({
+  //       chatrooms: data.chatrooms,
   //     });
+  //   });
   // }
 
   handleLogout = (event) => {
@@ -40,12 +28,17 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {console.log(this.props.currentChatroom)}
         <NavBar
           user={this.props.currentUser}
           handleLogout={this.handleLogout}
         />
-        {/* <ChatroomList rooms={this.state.chatrooms} /> */}
-        <form
+        <section className="main-content columns is-fullheight">
+          <ChatroomList />
+          <Chatroom chatroom={this.props.currentChatroom} />
+        </section>
+        {/* TEXT FORM */}
+        {/* <form
           onSubmit={(e) => {
             e.preventDefault();
             e.target.reset();
@@ -64,14 +57,17 @@ class Home extends Component {
               <button className="button is-info">Send</button>
             </div>
           </div>
-        </form>
+        </form> */}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.userState.currentUser };
+  return {
+    currentChatroom: state.chatroomState.currentChatroom,
+    currentUser: state.userState.currentUser,
+  };
 };
 
 // export default withRouter(Home);

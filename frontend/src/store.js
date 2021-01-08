@@ -7,9 +7,9 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
-    chatroomState: chatroomReducer,
-    // messageState: messageReducer,
-    userState: userReducer,
+  chatroomState: chatroomReducer,
+  // messageState: messageReducer,
+  userState: userReducer,
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
