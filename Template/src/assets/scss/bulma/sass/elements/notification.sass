@@ -1,21 +1,21 @@
-$notification-background-color: $background !default
-$notification-code-background-color: $scheme-main !default
-$notification-radius: $radius !default
-$notification-padding: 1.25rem 2.5rem 1.25rem 1.5rem !default
-$notification-padding-ltr: 1.25rem 2.5rem 1.25rem 1.5rem !default
-$notification-padding-rtl: 1.25rem 1.5rem 1.25rem 2.5rem !default
+$unread-background-color: $background !default
+$unread-code-background-color: $scheme-main !default
+$unread-radius: $radius !default
+$unread-padding: 1.25rem 2.5rem 1.25rem 1.5rem !default
+$unread-padding-ltr: 1.25rem 2.5rem 1.25rem 1.5rem !default
+$unread-padding-rtl: 1.25rem 1.5rem 1.25rem 2.5rem !default
 
-$notification-colors: $colors !default
+$unread-colors: $colors !default
 
-.notification
+.unread
   @extend %block
-  background-color: $notification-background-color
-  border-radius: $notification-radius
+  background-color: $unread-background-color
+  border-radius: $unread-radius
   position: relative
   +ltr
-    padding: $notification-padding-ltr
+    padding: $unread-padding-ltr
   +rtl
-    padding: $notification-padding-rtl
+    padding: $unread-padding-rtl
   a:not(.button):not(.dropdown-item)
     color: currentColor
     text-decoration: underline
@@ -23,7 +23,7 @@ $notification-colors: $colors !default
     color: currentColor
   code,
   pre
-    background: $notification-code-background-color
+    background: $unread-code-background-color
   pre code
     background: transparent
   & > .delete
@@ -35,7 +35,7 @@ $notification-colors: $colors !default
   .content
     color: currentColor
   // Colors
-  @each $name, $pair in $notification-colors
+  @each $name, $pair in $unread-colors
     $color: nth($pair, 1)
     $color-invert: nth($pair, 2)
     &.is-#{$name}

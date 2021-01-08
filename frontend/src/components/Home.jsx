@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 
 
-import NavBar from "./NavBar";
+
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
@@ -19,17 +19,6 @@ class Home extends Component {
       });
   }
 
-  // // Load up the chatrooms
-  // componentDidMount() {
-  //   fetch(`http://localhost:3000/users/${this.props.currentUser.id}`)
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       // console.log(data.chatrooms);
-  //       this.setState({
-  //         chatrooms: data.chatrooms,
-  //       });
-  //     });
-  // }
 
   handleLogout = (event) => {
     event.preventDefault();
@@ -40,10 +29,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <NavBar
-          user={this.props.currentUser}
-          handleLogout={this.handleLogout}
-        />
         {/* <ChatroomList rooms={this.state.chatrooms} /> */}
         <form
           onSubmit={(e) => {
