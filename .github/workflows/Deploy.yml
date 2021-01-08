@@ -89,6 +89,9 @@ jobs:
     #   working-directory: ./deploy
     - name: Download all artifacts
       uses: actions/download-artifact@v2
+    - name: Copy redirects into folder
+      run: |
+        mv ./_redirects ./frontend-build/_redirects
     - name: List Directories
       run: |
         ls

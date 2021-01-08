@@ -5,11 +5,13 @@ import userReducer from "./reducers/userReducer";
 
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import unreadReducer from "./reducers/unreadPostReducer";
 
 const rootReducer = combineReducers({
-  chatroomState: chatroomReducer,
-  // messageState: messageReducer,
-  userState: userReducer,
+    chatroomState: chatroomReducer,
+    // messageState: messageReducer,
+    userState: userReducer,
+    unreadState: unreadReducer,
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
