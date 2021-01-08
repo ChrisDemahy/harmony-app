@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import NavBar from "./NavBar";
+
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import ChatroomList from "../containers/ChatroomList";
@@ -29,14 +29,8 @@ class Home extends Component {
         return (
             <div>
                 {console.log(this.props.currentChatroom)}
-                <NavBar
-                    user={this.props.currentUser}
-                    handleLogout={this.handleLogout}
-                />
-                <section className="main-content columns is-fullheight">
-                    <ChatroomList />
-                    <Chatroom chatroom={this.props.currentChatroom} />
-                </section>
+
+                <section className="main-content columns is-fullheight"></section>
                 {/* TEXT FORM */}
                 {/* <form
           onSubmit={(e) => {

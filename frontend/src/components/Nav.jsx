@@ -30,13 +30,13 @@ const Nav = () => {
             <nav className="level is-dark is-fixed-top">
                 {/*  Left side */}
                 <div className="level-left">
-                    {currentChatroom.name && (
+                    {currentChatroom && (
                         <p className="level-item">
                             <FontAwesomeIcon
                                 style={{ height: "20px", width: "20px" }}
                                 icon={faHashtag}
                             />
-                            {`${currentChatroom.name}`}
+                            {currentChatroom.name}
                         </p>
                     )}
                 </div>

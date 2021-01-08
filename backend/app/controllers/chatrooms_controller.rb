@@ -1,16 +1,23 @@
 class ChatroomsController < ApplicationController
-  before_action :set_chatroom, only: [:show, :update, :destroy]
+  before_action :set_chatroom, only: %i[show update destroy]
 
   # GET /chatrooms
   def index
-    @chatrooms = Chatroom.all   
-
-    render json: @chatrooms
+    @chatrooms = Chatroom.all
+    # render json: @chatrooms
+    @chatrooms.filter { |room| room.users.include?(current_user) }
+    render json: @chatrooms,
+           include: [
+             posts: { include: [user: { except: %i[password_digest] }] }
+           ]
   end
 
   # GET /chatrooms/1
-  def show    
-    posts = @chatroom.posts.map{ |post, user| user=[post.user.username, post.user.avatar], post }
+  def show
+    posts =
+      @chatroom.posts.map do |post, user|
+        user = [post.user.username, post.user.avatar], post
+      end
     render json: { chatroom: @chatroom, posts: posts }
   end
 
@@ -40,13 +47,14 @@ class ChatroomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_chatroom
-      @chatroom = Chatroom.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def chatroom_params
-      params.require(:chatroom).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_chatroom
+    @chatroom = Chatroom.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def chatroom_params
+    params.require(:chatroom).permit(:name)
+  end
 end

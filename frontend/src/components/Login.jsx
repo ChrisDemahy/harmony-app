@@ -24,7 +24,7 @@ class Login extends React.Component {
         setTimeout(() => {
             let user_id = this.props.currentUser.id;
             if (user_id != null) {
-                this.props.history.push("/home");
+                this.props.history.push("/chatrooms");
             }
         }, 100);
     };
