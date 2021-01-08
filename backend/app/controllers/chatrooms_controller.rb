@@ -4,20 +4,22 @@ class ChatroomsController < ApplicationController
   # GET /chatrooms
   def index
     @chatrooms = Chatroom.all
-    # render json: @chatrooms
-    @chatrooms.filter { |room| room.users.include?(current_user) }
-    render json: @chatrooms,
-           include: [
-             posts: { include: [user: { except: %i[password_digest] }] }
-           ]
+    render json: @chatrooms
+    # @chatrooms.filter { |room| room.users.include?(current_user) }
+    # render json: @chatrooms,
+    #        include: [
+    #          posts: { include: [user: { except: %i[password_digest] }] }
+    #        ]
   end
 
   # GET /chatrooms/1
   def show
-    posts =
-      @chatroom.posts.map do |post, user|
-        user = [post.user.username, post.user.avatar], post
-      end
+    posts = @chatroom.posts.map{ |post, user| user=post.user.username, post }
+    
+    # posts =
+    #   @chatroom.posts.map do |post, user|
+    #     user = [post.user.username, post.user.avatar], post
+    #   end
     render json: { chatroom: @chatroom, posts: posts }
   end
 
